@@ -12,7 +12,8 @@ class Api {
   requestLogout = (token) => (
     superagent
     .delete(`${API_HOST}/auth/sessions`)
-    .set('Authorization', `token ${token}`)
+    .set('Authorization', `Bearer ${token}`)
+    .send({token})
   )
   
   getBoardsList = (page, count) => {
