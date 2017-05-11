@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 import './BoardCard.css';
 
+
 export default class BoardCard extends Component {
   constructor(props) {
     super(props);

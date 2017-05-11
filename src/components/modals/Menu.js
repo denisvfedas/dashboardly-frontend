@@ -6,7 +6,7 @@ import './Menu.css';
 
 
 class Menu extends Component {
-  constructor(props) {
+  constructor() {
     super();
 
     this.state = {};
@@ -16,17 +16,30 @@ class Menu extends Component {
     this.props.closeMenu();
   }
   
-  componentDidMount(){
-    var token = auth.getToken()
-    var that = this;
-    auth.getMe(token)
-    .then((res)=> that.setState({ gravatar: res.body.avatarUrl}) )
-
+  componentDidMount() {
+    this._fetchAvatar();
   }
 
+  _fetchAvatar = () => {
+    var that = this;
+    auth.getMe(auth.getToken())
+    .then((res) => {
+      that.setState({ gravatar: res.body.avatarUrl})
+    })
+  }
+  
+  //The original component did mount function!
+  // componentDidMount(){
+  //   var token = auth.getToken();
+  //   var that = this;
+  //   auth.getMe(token)
+  //   .then((res) => {
+  //     that.setState({ gravatar: res.body.avatarUrl}) });
+  // }
+
   render() {
-    let { closeMenu, show } = this.props
-    const isLoggedIn = auth.isLoggedIn()
+    let { closeMenu, show } = this.props;
+    const isLoggedIn = auth.isLoggedIn();
     return (
       <div className={`menu ${show?"show":""}`}>
 

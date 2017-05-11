@@ -19,7 +19,7 @@ class Api {
   getBoardsList = (page, count) => {
     return superagent
     .get(`${API_HOST}/boards`)
-    .query({page, count})
+    .query({page, count});
   }
   
   
@@ -43,6 +43,12 @@ class Api {
     superagent
     .get(`${API_HOST}/auth/me`)
     .set('Authorization', `Bearer ${token}`)
+  )
+  
+  createBoard = (title, description) => (
+    superagent
+    .post(`${API_HOST}/boards`)
+    .send({title, description})
     
   )
   
