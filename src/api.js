@@ -32,6 +32,12 @@ class Api {
     .get(`${API_HOST}/boards/${boardId}/bookmarks`)
   )
   
+  signUp = (email, password) => (
+    superagent
+    .post(`${API_HOST}/users`)
+    .send(email, password)
+  )
+  
 }
 
 export default new Api();

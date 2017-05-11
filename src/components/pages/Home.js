@@ -15,7 +15,7 @@ export default class Home extends Component {
   }
   
   componentDidMount() {
-    this._fetchBoards(1, 5);
+    this._fetchBoards(1, 9);
   }
   
   _fetchBoards = (page, limit) => {
