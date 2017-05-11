@@ -20,13 +20,15 @@ export default class SignUp extends Component {
       .then(res => this.props.router.push('/login'))
       .catch(function(error){
         
-        if(error.response.body){
+          //for the password error
+        if(error.response.body.errors){
           
           var message = error.response.body.errors.password[0];
-          console.log(message, "the message");
           that.setState({error: message});
         }
-        // that.setState();
+        // console.log(error.response.body, "the message");
+        message = error.response.body
+        that.setState({error: message});
       })
     }
     else {
