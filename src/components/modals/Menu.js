@@ -6,9 +6,22 @@ import './Menu.css';
 
 
 class Menu extends Component {
+  constructor(props) {
+    super();
+
+    this.state = {};
+  }
   
   handleClickOutside = () => {
     this.props.closeMenu();
+  }
+  
+  componentDidMount(){
+    var token = auth.getToken()
+    var that = this;
+    auth.getMe(token)
+    .then((res)=> that.setState({ gravatar: res.body.avatarUrl}) )
+
   }
 
   render() {
@@ -18,7 +31,7 @@ class Menu extends Component {
       <div className={`menu ${show?"show":""}`}>
 
         <div className="menu__header">
-          <img src="" alt="profile-pic" className="menu__avatar"/>
+          <img src={this.state.gravatar} alt="profile-pic" className="menu__avatar"/>
         </div>
 
         <div className="menu__list">

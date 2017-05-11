@@ -27,6 +27,10 @@ module.exports = {
   signup(email, password) {
     //console.log(email, password, "the email and password");
     return api.signUp(email, password)
+  },
+  
+  getMe(token) {
+    return api.getMe(token);
   }
   
 }
