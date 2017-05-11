@@ -15,13 +15,14 @@ export default class Home extends Component {
   }
   
   componentDidMount() {
-    this._fetchBoards();
+    this._fetchBoards(1, 5);
   }
   
-  _fetchBoards = () => {
-    api.getBoardsList()
+  _fetchBoards = (page, limit) => {
+    api.getBoardsList(page, limit)
     .then(res => {
-      this.setState({ boards: res.body.boards })
+      //console.log('res',res)
+      this.setState({ boards: res.body })
     })
     .catch(console.error)
   }

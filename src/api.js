@@ -15,10 +15,12 @@ class Api {
     .set('Authorization', `token ${token}`)
   )
   
-  getBoardsList = (page, count) => (
-    superagent
+  getBoardsList = (page, count) => {
+    return superagent
     .get(`${API_HOST}/boards`)
-  )
+    .query({page, count})
+  }
+  
   
   getBoard = (id) => (
     superagent
