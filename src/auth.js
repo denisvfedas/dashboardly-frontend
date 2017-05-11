@@ -24,4 +24,8 @@ module.exports = {
     return !!localStorage.token
   },
   
+  signup(email, password) {
+    return api.signUp(email, password)
+  }
+  
 }
