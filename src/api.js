@@ -35,8 +35,8 @@ class Api {
   
   signUp = (email, password) => (
     superagent
-    .post(`${API_HOST}/users`)
-    .send(email, password)
+    .post(`${API_HOST}/auth/users`)
+    .send({email, password})
   )
   
 }
