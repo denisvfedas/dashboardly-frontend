@@ -3,12 +3,13 @@ import './CreateBoard.css';
 import api from '../../api';
 import auth from '../../auth';
 import onClickOutside from 'react-onclickoutside';
+import {browserHistory} from 'react-router'
 
 const ENTER = 13;
 
 class CreateBoard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
   
@@ -26,7 +27,7 @@ class CreateBoard extends Component {
     let { title: {value: title}, description: {value: description} } = this.refs;
     if (title && description) {
       api.createBoard(title, description, auth.getToken())
-      .then(res => this.props.router.push(`/boards/${res.body[0].id}`))
+      .then(res => browserHistory.push(`/boards/${res.body[0].id}`))
       .catch(console.error)
     }
     else {
