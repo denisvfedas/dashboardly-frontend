@@ -31,6 +31,21 @@ module.exports = {
   
   getMe(token) {
     return api.getMe(token);
+  },
+  
+  checkUserOwnsBoard(id, token){
+    
+    if(token == null){
+      return false;
+    }
+    else{
+      // console.log(token, "checkUserOwnsBoard token")
+      return api.checkUserOwnsBoard(id, token)
+      .then((res) => {
+        console.log(!!res.status, "the result")
+        return !!res.status
+      })
+    }
   }
   
 }

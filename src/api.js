@@ -50,8 +50,17 @@ class Api {
     .post(`${API_HOST}/boards`)
     .set('Authorization', `Bearer ${token}`)
     .send({title, description})
-    
   )
+  
+  checkUserOwnsBoard = (boardId, token) => (
+    superagent
+    .get(`${API_HOST}/boards/${boardId}/user`)
+    .set('Authorization', `Bearer ${token}`)
+  )
+  
+  // getBoard = (boardId) => (
+    
+  // )
   
 }
 
