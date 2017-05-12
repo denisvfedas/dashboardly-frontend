@@ -1,0 +1,32 @@
+.createBoard {
+    margin: 0;
+    /*padding: 1em;*/
+    
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    width: 50%;
+    height: 60%;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: lightgrey;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  transform: translateX(-270px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.createBoard.show {
+  transform: translateX(0px);
+  opacity: 1;
+  visibility: visible;
+}
+
+

@@ -4,17 +4,20 @@ import BoardCard from '../elements/BoardCard';
 import AddButton from '../elements/AddButton';
 import auth from '../../auth';
 import './Home.css';
+import CreateBoard from '../modals/CreateBoard';
 
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boards: []
+      boards: [],
+      isModalOpen: false
     };
   }
   
   componentDidMount() {
+    
     this._fetchBoards(1, 9);
   }
   
@@ -26,9 +29,17 @@ export default class Home extends Component {
     })
     .catch(console.error)
   }
-
+  
+  _handleOnClick(event){
+    console.log("Click!")
+    this.setState({ isModalOpen: !(this.state.isModalOpen)});
+  }
+  
+  closeModal = () => this.setState({ isModalOpen: false })
+  
   render() {
-    let { boards } = this.state
+    let { boards, isModalOpen } = this.state
+    console.log(isModalOpen)
     return (
       <div className="home">
         { boards.map(b =>
@@ -40,7 +51,9 @@ export default class Home extends Component {
             updatedAt={b.updatedAt}
           />
         )}
-        {auth.isLoggedIn() ? <AddButton /> : null}
+        {auth.isLoggedIn() ? <AddButton click={(event) => this._handleOnClick(event)}/> : null}
+        
+        <CreateBoard show={isModalOpen} closeModal={this.closeModal}/>
       </div>
     );
   }

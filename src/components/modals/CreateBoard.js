@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import './CreateBoard.css';
 import api from '../../api';
+import auth from '../../auth';
+import onClickOutside from 'react-onclickoutside';
 
 const ENTER = 13;
 
-export default class CreateBoard extends Component {
-  constructor(props) {
-    super(props);
+class CreateBoard extends Component {
+  constructor() {
+    super();
     this.state = {};
   }
   
@@ -23,19 +25,25 @@ export default class CreateBoard extends Component {
     // deep destructuring equivalent to (let email = this.refs.email.value;)
     let { title: {value: title}, description: {value: description} } = this.refs;
     if (title && description) {
-      api.createBoard(title, description)
-      .then(res => console.log(res))
-      //.then(res => this.props.router.push('/'))
+      api.createBoard(title, description, auth.getToken())
+      .then(res => this.props.router.push(`/boards/${res.body[0].id}`))
       .catch(console.error)
     }
     else {
-      this.setState({ error: "Please enter an email and password"})
+      this.setState({ error: "Please enter a title and description"})
     }
   }
+  
+  handleClickOutside = () => {
+    this.props.closeModal();
+  }
+  
 
   render() {
+    let {show} = this.props;
+    // console.log(show, "show")
     return (
-      <div>
+      <div className={`createBoard ${show?"show":""}`}>
         <h1>Create Board</h1>
         <input type="text" ref="title"
           onKeyUp={this._handleTyping}
@@ -49,3 +57,6 @@ export default class CreateBoard extends Component {
   }
 
 }
+
+
+export default onClickOutside(CreateBoard);

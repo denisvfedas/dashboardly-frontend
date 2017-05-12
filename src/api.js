@@ -45,9 +45,10 @@ class Api {
     .set('Authorization', `Bearer ${token}`)
   )
   
-  createBoard = (title, description) => (
+  createBoard = (title, description, token) => (
     superagent
     .post(`${API_HOST}/boards`)
+    .set('Authorization', `Bearer ${token}`)
     .send({title, description})
     
   )
